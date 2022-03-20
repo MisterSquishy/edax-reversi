@@ -330,6 +330,10 @@ build:
 	@echo "building edax..."
 	$(CC) $(CFLAGS) all.c -o $(BIN)/$(EXE) $(LIBS)
 
+build-wasm:
+	@echo "building edax for wasm..."
+	emcc -o $(BIN)/test.html all.c -O3 -s NO_EXIT_RUNTIME=1 -s "EXPORTED_RUNTIME_METHODS=['ccall']" -s ASSERTIONS=1
+
 pgo-build:
 	@echo "building edax with pgo..."
 	$(MAKE) clean
